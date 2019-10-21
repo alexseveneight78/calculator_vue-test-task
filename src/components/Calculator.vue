@@ -6,13 +6,13 @@
             <div></div>
         </div>
         <div class="display_panel">
-            <span>0</span>
+            <span>{{ currentNumber }}</span>
         </div>
         <div class="main_panel">
             <div class="left_side">
                 <button @click="">AC</button>
                 <button @click="">+/-</button>
-                <button @click="">%</button>
+                <button :disabled="true">%</button>
                 <button @click="">7</button>
                 <button @click="">8</button>
                 <button @click="">9</button>
@@ -38,7 +38,14 @@
 
 <script>
     export default {
-        
+        data(){
+            return {
+                currentNumber: 0
+            }
+        },
+        methods: {
+
+        }
     }
 </script>
 
@@ -58,8 +65,6 @@
         justify-content: flex-start;
         flex-direction: row;
         background-color: rgb(64, 64, 64);
-        border: 1px solid black;
-        border-radius: 10px;
     }
     .outer_control_panel div {
         width: 15px;
@@ -119,7 +124,6 @@
     }
     .main_panel .right_side {
         width: 75px;
-        outline: 1px solid red;
         height: 100%;
     }
 </style>
