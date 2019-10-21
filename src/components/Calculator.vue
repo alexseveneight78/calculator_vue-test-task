@@ -8,7 +8,31 @@
         <div class="display_panel">
             <span>0</span>
         </div>
-        <div class="main_panel"></div>
+        <div class="main_panel">
+            <div class="left_side">
+                <button @click="">AC</button>
+                <button @click="">+/-</button>
+                <button @click="">%</button>
+                <button @click="">7</button>
+                <button @click="">8</button>
+                <button @click="">9</button>
+                <button @click="">4</button>
+                <button @click="">5</button>
+                <button @click="">6</button>
+                <button @click="">1</button>
+                <button @click="">2</button>
+                <button @click="">3</button>
+                <button @click="">0</button>
+                <button @click="">,</button>
+            </div>
+            <div class="right_side">
+                <button @click="">/</button>
+                <button @click="">x</button>
+                <button @click="">-</button>
+                <button @click="">+</button>
+                <button @click="">=</button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -66,5 +90,36 @@
     }
     .main_panel {
         background-color: rgb(230, 230, 230);
+        height: 400px;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+    }
+    .main_panel .left_side {
+        width: 225px;
+        outline: 1px solid white;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items:flex-start;
+    }
+    button {
+        width: 75px;
+        height: 77.6px;
+        font-size: 22px;
+    }
+    .main_panel .left_side button {
+        color: black;
+    }
+    .main_panel .right_side button {
+        background-color: orange;
+        color: white;
+    }
+    .main_panel .right_side {
+        width: 75px;
+        outline: 1px solid red;
+        height: 100%;
     }
 </style>
