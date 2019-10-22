@@ -6,7 +6,7 @@
             <div></div>
         </div>
         <div class="display_panel">
-            <span>{{ currentExpression }}</span>
+            <span :class="fontSize">{{ currentExpression }}</span>
         </div>
         <div class="main_panel">
             <div class="left_side">
@@ -57,7 +57,9 @@
                 divide: '/',
                 multiply: '*',
                 currentExpression: '0',
-                arr: []
+                arr: [],
+                bigSize: '55px',
+                smallSize: '18px'
             }
         },
         methods: {
@@ -112,7 +114,7 @@
                 this.currentExpression += this.zero;
             },
             addComma(){
-                this.arr.push(this.comma);
+                this.arr.push('.');
                 this.currentExpression += this.comma;
             },
             addDivide(){
@@ -134,11 +136,15 @@
             },
             addEqual(){
                 let calculation = this.arr.join('');
-                this.currentExpression = eval(calculation);
-                console.log(typeof this.arr);
-                this.arr.length = 0;
-                this.arr.push(this.currentExpression.toString());
-                console.log(typeof this.arr);
+                if(eval(calculation) === Infinity) {
+                    alert('Division by zero is impossible!');
+                    this.currentExpression = '0';
+                    this.arr.length = 0;
+                } else {
+                    this.currentExpression = eval(calculation);
+                    this.arr.length = 0;
+                    this.arr.push(this.currentExpression.toString());
+                }
             },
             removeInitialZero(){
                 if(this.arr[0] === '0' && this.arr.length === 1) {
@@ -153,6 +159,11 @@
             },
             addPlusMinus(){
                 console.log('+/-');
+            }
+        },
+        computed: {
+            fontSize(){
+                console.log(this.arr.length)
             }
         },
         created(){
@@ -201,9 +212,9 @@
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
+        flex-wrap: wrap;
         padding: 10px 5px 10px 0;
         box-sizing: border-box;
-        font-size: 55px;
     }
     .main_panel {
         background-color: rgb(230, 230, 230);
@@ -237,5 +248,8 @@
     .main_panel .right_side {
         width: 80px;
         height: 100%;
+    }
+    .fontSize {
+        font-size: 55px;
     }
 </style>
