@@ -6,7 +6,8 @@
             <div></div>
         </div>
         <div class="display_panel">
-            <span :class="fontSize">{{ currentExpression }}</span>
+            <span :class="currentExpression.length > 12 ? smallSize : bigSize">{{ currentExpression }}</span>
+            <span :style="{fontSize: '12px', height: '10px'}">{{ arr.length > 3 ? attention : '' }}</span>
         </div>
         <div class="main_panel">
             <div class="left_side">
@@ -58,8 +59,9 @@
                 multiply: '*',
                 currentExpression: '0',
                 arr: [],
-                bigSize: '55px',
-                smallSize: '18px'
+                smallSize: 'smallSize',
+                bigSize: 'bigSize',
+                attention: 'Max symbol length is exceeded!'
             }
         },
         methods: {
@@ -249,7 +251,10 @@
         width: 80px;
         height: 100%;
     }
-    .fontSize {
+    .bigSize {
         font-size: 55px;
+    }
+    .smallSize {
+        font-size: 18px;
     }
 </style>
