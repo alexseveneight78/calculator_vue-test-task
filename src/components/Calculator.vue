@@ -56,52 +56,58 @@
                 plus: '+',
                 divide: '/',
                 multiply: '*',
-                currentExpression: 0,
+                currentExpression: '0',
                 arr: []
             }
         },
         methods: {
             addOne(){
+                this.removeInitialZero();
                 this.arr.push(this.one);
-                //this.removeInitialZero();
                 this.currentExpression += this.one;
             },
             addTwo(){
+                this.removeInitialZero();
                 this.arr.push(this.two);
-                //this.removeInitialZero();
                 this.currentExpression += this.two;
             },
             addThree(){
+                this.removeInitialZero();
                 this.arr.push(this.three);
-                //this.removeInitialZero();
                 this.currentExpression += this.three;
             },
             addFour(){
+                this.removeInitialZero();
                 this.arr.push(this.four);
-                //this.removeInitialZero();
                 this.currentExpression += this.four;            
             },
             addFive(){
+                this.removeInitialZero();
                 this.arr.push(this.five);
                 this.currentExpression += this.five;
             },
             addSix(){
+                this.removeInitialZero();
                 this.arr.push(this.six);
                 this.currentExpression += this.six;
             },
             addSeven(){
+                this.removeInitialZero();
                 this.arr.push(this.seven);
                 this.currentExpression += this.seven;
             },
             addEight(){
+                this.removeInitialZero();
                 this.arr.push(this.eight);
                 this.currentExpression += this.eight;
             },
             addNine(){
+                this.removeInitialZero();
                 this.arr.push(this.nine);
                 this.currentExpression += this.nine;
             },
             addZero(){
+                this.removeInitialZero();
                 this.arr.push(this.zero);
                 this.currentExpression += this.zero;
             },
@@ -129,30 +135,35 @@
             addEqual(){
                 let calculation = this.arr.join('');
                 this.currentExpression = eval(calculation);
-                console.log(this.arr);
+                console.log(typeof this.arr);
                 this.arr.length = 0;
                 this.arr.push(this.currentExpression.toString());
-                console.log(this.arr);
+                console.log(typeof this.arr);
             },
             removeInitialZero(){
-                if(this.arr.length > 0) {
+                if(this.arr[0] === '0' && this.arr.length === 1) {
+                    this.arr.shift();
                     this.currentExpression = '';
                 }
             },
             allClear(){
                 this.arr.length = 0;
-                this.currentExpression = 0;
+                this.currentExpression = '0';
+                this.arr.push(this.currentExpression);
             },
             addPlusMinus(){
                 console.log('+/-');
             }
+        },
+        created(){
+            this.arr.push(this.currentExpression);
         }
     }
 </script>
 
 <style scoped>
     .calculator {
-        width: 300px;
+        width: 360px;
         border: 1px solid rgb(0,0,0);
         border-radius: 10px;
         display: flex;
@@ -190,9 +201,9 @@
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        padding: 10px 20px 10px 0;
+        padding: 10px 5px 10px 0;
         box-sizing: border-box;
-        font-size: 60px;
+        font-size: 55px;
     }
     .main_panel {
         background-color: rgb(230, 230, 230);
@@ -202,7 +213,7 @@
         flex-wrap: nowrap;
     }
     .main_panel .left_side {
-        width: 225px;
+        width: 270px;
         outline: 1px solid white;
         height: 100%;
         display: flex;
@@ -212,7 +223,7 @@
         align-items:flex-start;
     }
     button {
-        width: 75px;
+        width: 90px;
         height: 77.6px;
         font-size: 22px;
     }
@@ -224,7 +235,7 @@
         color: white;
     }
     .main_panel .right_side {
-        width: 75px;
+        width: 80px;
         height: 100%;
     }
 </style>
