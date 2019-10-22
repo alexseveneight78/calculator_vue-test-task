@@ -6,31 +6,31 @@
             <div></div>
         </div>
         <div class="display_panel">
-            <span>{{ currentNumber }}</span>
+            <span>{{ currentExpression }}</span>
         </div>
         <div class="main_panel">
             <div class="left_side">
-                <button @click="">AC</button>
-                <button @click="">+/-</button>
+                <button @click="allClear" ref="AC">AC</button>
+                <button @click="addPlusMinus" ref="plusMinus">{{ plusMinus }}</button>
                 <button :disabled="true">%</button>
-                <button @click="">7</button>
-                <button @click="">8</button>
-                <button @click="">9</button>
-                <button @click="">4</button>
-                <button @click="">5</button>
-                <button @click="">6</button>
-                <button @click="">1</button>
-                <button @click="">2</button>
-                <button @click="">3</button>
-                <button @click="">0</button>
-                <button @click="">,</button>
+                <button @click="addSeven" ref="seven">{{ seven }}</button>
+                <button @click="addEight" ref="eight">{{ eight }}</button>
+                <button @click="addNine" ref="nine">{{ nine }}</button>
+                <button @click="addFour" ref="four">{{ four }}</button>
+                <button @click="addFive" ref="five">{{ five }}</button>
+                <button @click="addSix" ref="six">{{ six }}</button>
+                <button @click="addOne" ref="one">{{ one }}</button>
+                <button @click="addTwo" ref="two">{{ two }}</button>
+                <button @click="addThree" ref="three">{{ three }}</button>
+                <button @click="addZero" ref="zero">{{ zero }}</button>
+                <button @click="addComma" ref="comma">{{ comma }}</button>
             </div>
             <div class="right_side">
-                <button @click="">/</button>
-                <button @click="">x</button>
-                <button @click="">-</button>
-                <button @click="">+</button>
-                <button @click="">=</button>
+                <button @click="addDivide" ref="divide">/</button>
+                <button @click="addMultiply" ref="multiply">x</button>
+                <button @click="addMinus" ref="minus">-</button>
+                <button @click="addPlus" ref="plus">+</button>
+                <button @click="addEqual" ref="equal">=</button>
             </div>
         </div>
     </div>
@@ -40,11 +40,112 @@
     export default {
         data(){
             return {
-                currentNumber: 0
+                plusMinus: '+/-',
+                one: '1',
+                two: '2',
+                three: '3',
+                four: '4',
+                five: '5',
+                six: '6',
+                seven: '7',
+                eight: '8',
+                nine: '9',
+                zero: '0',
+                comma: ',',
+                minus: '-',
+                plus: '+',
+                divide: '/',
+                multiply: '*',
+                currentExpression: 0,
+                arr: []
             }
         },
         methods: {
-
+            addOne(){
+                this.arr.push(this.one);
+                //this.removeInitialZero();
+                this.currentExpression += this.one;
+            },
+            addTwo(){
+                this.arr.push(this.two);
+                //this.removeInitialZero();
+                this.currentExpression += this.two;
+            },
+            addThree(){
+                this.arr.push(this.three);
+                //this.removeInitialZero();
+                this.currentExpression += this.three;
+            },
+            addFour(){
+                this.arr.push(this.four);
+                //this.removeInitialZero();
+                this.currentExpression += this.four;            
+            },
+            addFive(){
+                this.arr.push(this.five);
+                this.currentExpression += this.five;
+            },
+            addSix(){
+                this.arr.push(this.six);
+                this.currentExpression += this.six;
+            },
+            addSeven(){
+                this.arr.push(this.seven);
+                this.currentExpression += this.seven;
+            },
+            addEight(){
+                this.arr.push(this.eight);
+                this.currentExpression += this.eight;
+            },
+            addNine(){
+                this.arr.push(this.nine);
+                this.currentExpression += this.nine;
+            },
+            addZero(){
+                this.arr.push(this.zero);
+                this.currentExpression += this.zero;
+            },
+            addComma(){
+                this.arr.push(this.comma);
+                this.currentExpression += this.comma;
+            },
+            addDivide(){
+                this.arr.push(this.divide);
+                this.currentExpression += this.divide;
+            },
+            addMultiply(){
+                this.arr.push(this.multiply);
+                this.currentExpression += this.multiply;
+                console.log(this.arr)
+            },
+            addPlus(){
+                this.arr.push(this.plus);
+                this.currentExpression += this.plus;
+            },
+            addMinus(){
+                this.arr.push(this.minus);
+                this.currentExpression += this.minus;
+            },
+            addEqual(){
+                let calculation = this.arr.join('');
+                this.currentExpression = eval(calculation);
+                console.log(this.arr);
+                this.arr.length = 0;
+                this.arr.push(this.currentExpression.toString());
+                console.log(this.arr);
+            },
+            removeInitialZero(){
+                if(this.arr.length > 0) {
+                    this.currentExpression = '';
+                }
+            },
+            allClear(){
+                this.arr.length = 0;
+                this.currentExpression = 0;
+            },
+            addPlusMinus(){
+                console.log('+/-');
+            }
         }
     }
 </script>
