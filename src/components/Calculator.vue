@@ -20,7 +20,7 @@
                 <button @click="addFour">{{ four }}</button>
                 <button @click="addFive">{{ five }}</button>
                 <button @click="addSix">{{ six }}</button>
-                <button @click="addOne" >{{ one }}</button>
+                <button @click="addOne" v-on:49>{{ one }}</button>
                 <button @click="addTwo">{{ two }}</button>
                 <button @click="addThree">{{ three }}</button>
                 <button @click="addZero">{{ zero }}</button>
@@ -59,12 +59,16 @@
                 multiply: '*',
                 currentExpression: '0',
                 arr: [],
+                currentArr: [],
                 smallSize: 'smallSize',
                 bigSize: 'bigSize',
                 att: ''
             }
         },
         methods: {
+            greet(){
+                alert('HI')
+            },
             addOne(){
                 this.removeInitialZero();
                 this.arr.push(this.one);
@@ -134,8 +138,10 @@
                 this.currentExpression += this.plus;
             },
             addMinus(){
-                this.arr.push(this.minus);
-                this.currentExpression += this.minus;
+                if(!this.arr.join('').endsWith('-')) {
+                    this.arr.push(this.minus);
+                    this.currentExpression += this.minus;                
+                } 
             },
             addEqual(){
                 let calculation = this.arr.join('');
@@ -143,10 +149,13 @@
                     alert('Division by zero is impossible!');
                     this.currentExpression = '0';
                     this.arr.length = 0;
+                } else if(eval(calculation.split('').length) >= 40) {
+                    alert('Max limit of symbols is exceeded!');
+                    this.allClear();                
                 } else {
                     this.currentExpression = eval(calculation);
                     this.arr.length = 0;
-                    this.arr.push(this.currentExpression.toString());
+                    //this.currentExpression = '0';
                 }
             },
             removeInitialZero(){
