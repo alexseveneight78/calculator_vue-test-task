@@ -7,31 +7,31 @@
         </div>
         <div class="display_panel">
             <span :class="currentExpression.length > 12 ? smallSize : bigSize">{{ currentExpression }}</span>
-            <span :style="{fontSize: '12px', height: '10px'}">{{ arr.length > 3 ? attention : '' }}</span>
+            <span :style="{ fontSize: '12px' }">{{ attention }}</span>
         </div>
         <div class="main_panel">
             <div class="left_side">
-                <button @click="allClear" ref="AC">AC</button>
-                <button @click="addPlusMinus" ref="plusMinus">{{ plusMinus }}</button>
+                <button @click="allClear">AC</button>
+                <button @click="addPlusMinus">{{ plusMinus }}</button>
                 <button :disabled="true">%</button>
-                <button @click="addSeven" ref="seven">{{ seven }}</button>
-                <button @click="addEight" ref="eight">{{ eight }}</button>
-                <button @click="addNine" ref="nine">{{ nine }}</button>
-                <button @click="addFour" ref="four">{{ four }}</button>
-                <button @click="addFive" ref="five">{{ five }}</button>
-                <button @click="addSix" ref="six">{{ six }}</button>
-                <button @click="addOne" ref="one">{{ one }}</button>
-                <button @click="addTwo" ref="two">{{ two }}</button>
-                <button @click="addThree" ref="three">{{ three }}</button>
-                <button @click="addZero" ref="zero">{{ zero }}</button>
-                <button @click="addComma" ref="comma">{{ comma }}</button>
+                <button @click="addSeven">{{ seven }}</button>
+                <button @click="addEight">{{ eight }}</button>
+                <button @click="addNine" >{{ nine }}</button>
+                <button @click="addFour">{{ four }}</button>
+                <button @click="addFive">{{ five }}</button>
+                <button @click="addSix">{{ six }}</button>
+                <button @click="addOne" >{{ one }}</button>
+                <button @click="addTwo">{{ two }}</button>
+                <button @click="addThree">{{ three }}</button>
+                <button @click="addZero">{{ zero }}</button>
+                <button @click="addComma">{{ comma }}</button>
             </div>
             <div class="right_side">
-                <button @click="addDivide" ref="divide">/</button>
-                <button @click="addMultiply" ref="multiply">x</button>
-                <button @click="addMinus" ref="minus">-</button>
-                <button @click="addPlus" ref="plus">+</button>
-                <button @click="addEqual" ref="equal">=</button>
+                <button @click="addDivide">/</button>
+                <button @click="addMultiply">x</button>
+                <button @click="addMinus">-</button>
+                <button @click="addPlus">+</button>
+                <button @click="addEqual">=</button>
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
                 arr: [],
                 smallSize: 'smallSize',
                 bigSize: 'bigSize',
-                attention: 'Max symbol length is exceeded!'
+                att: ''
             }
         },
         methods: {
@@ -163,13 +163,13 @@
                 console.log('+/-');
             }
         },
-        computed: {
-            fontSize(){
-                console.log(this.arr.length)
-            }
-        },
         created(){
             this.arr.push(this.currentExpression);
+        },
+        computed: {
+            attention(){
+                return this.arr.length >= 40 ? (this.arr.length = 0, this.currentExpression = '', this.att = 'Max limit is exceeded!') : this.att = '';
+            }
         }
     }
 </script>
