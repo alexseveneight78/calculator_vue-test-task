@@ -69,6 +69,7 @@
                 this.removeInitialZero();
                 this.arr.push(this.one);
                 this.currentExpression += this.one;
+                console.log(this.arr)
             },
             addTwo(){
                 this.removeInitialZero();
@@ -160,7 +161,7 @@
                 this.arr.push(this.currentExpression);
             },
             addPlusMinus(){
-                console.log('+/-');
+                this.arr.join('')[0] !== '-' ? (this.arr.unshift('-'), this.currentExpression = this.arr.join('')) : (this.arr = this.arr.join('').slice(1).split(''), this.currentExpression = this.arr.join(''));
             }
         },
         created(){
