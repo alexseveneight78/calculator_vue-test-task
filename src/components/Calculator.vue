@@ -52,7 +52,7 @@
                 eight: '8',
                 nine: '9',
                 zero: '0',
-                comma: ',',
+                comma: '.',
                 minus: '-',
                 plus: '+',
                 divide: '/',
@@ -66,9 +66,6 @@
             }
         },
         methods: {
-            greet(){
-                alert('HI')
-            },
             addOne(){
                 this.removeInitialZero();
                 this.arr.push(this.one);
@@ -121,21 +118,28 @@
                 this.currentExpression += this.zero;
             },
             addComma(){
-                this.arr.push('.');
-                this.currentExpression += this.comma;
+                if(!this.arr.join('').endsWith('.')) {
+                    this.arr.push(this.comma);
+                    this.currentExpression += this.comma;                
+                }
             },
             addDivide(){
-                this.arr.push(this.divide);
-                this.currentExpression += this.divide;
+                if(!this.arr.join('').endsWith('/')) {
+                    this.arr.push(this.divide);
+                    this.currentExpression += this.divide;                
+                }
             },
             addMultiply(){
-                this.arr.push(this.multiply);
-                this.currentExpression += this.multiply;
-                console.log(this.arr)
+                if(!this.arr.join('').endsWith('*')) {
+                    this.arr.push(this.multiply);
+                    this.currentExpression += this.multiply;                
+                }
             },
             addPlus(){
-                this.arr.push(this.plus);
-                this.currentExpression += this.plus;
+                if(!this.arr.join('').endsWith('+')) {
+                    this.arr.push(this.plus);
+                    this.currentExpression += this.plus;                
+                }
             },
             addMinus(){
                 if(!this.arr.join('').endsWith('-')) {
@@ -155,7 +159,7 @@
                 } else {
                     this.currentExpression = eval(calculation);
                     this.arr.length = 0;
-                    //this.currentExpression = '0';
+                    this.arr.push(this.currentExpression)
                 }
             },
             removeInitialZero(){
@@ -187,13 +191,12 @@
 <style scoped>
     .calculator {
         width: 360px;
-        border: 1px solid rgb(0,0,0);
-        border-radius: 10px;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         flex-wrap: nowrap;
         height: 500px;
+        box-shadow: -20px 20px 60px gray;
     }
     .outer_control_panel {
         display: flex;
@@ -211,12 +214,21 @@
     .outer_control_panel :nth-child(1) {
         background-color: red;
     }
+    .outer_control_panel :nth-child(1):hover {
+        background-color: rgb(255, 102, 102)
+    }    
     .outer_control_panel :nth-child(2) {
         background-color: yellow;
     }
+    .outer_control_panel :nth-child(2):hover {
+        background-color: rgb(255, 255, 200);
+    }    
     .outer_control_panel :nth-child(3) {
         background-color: greenyellow;
     }
+    .outer_control_panel :nth-child(3):hover {
+        background-color: rgb(194, 255, 102);
+    }    
     .display_panel {
         background-color: rgb(64,64,64);
         height: 80px;
@@ -237,7 +249,6 @@
     }
     .main_panel .left_side {
         width: 270px;
-        outline: 1px solid white;
         height: 100%;
         display: flex;
         justify-content: flex-start;
@@ -249,10 +260,24 @@
         width: 90px;
         height: 77.6px;
         font-size: 22px;
+        cursor: pointer;
+        border: 1px solid transparent;
     }
+    button:active {
+        transform: translateY(1px);
+        filter: saturate(120%);
+    }
+    button:hover, button:focus {
+        border-color: currentColor;
+        background-color: rgb(217, 217, 217)
+    }
+
     .main_panel .left_side button {
         color: black;
     }
+    .main_panel .left_side button:nth-child(13) {
+        width: 180px;
+    }    
     .main_panel .right_side button {
         background-color: orange;
         color: white;
