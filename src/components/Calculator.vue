@@ -20,7 +20,7 @@
                 <button @click="addFour">{{ four }}</button>
                 <button @click="addFive">{{ five }}</button>
                 <button @click="addSix">{{ six }}</button>
-                <button @click="addOne" v-on:49>{{ one }}</button>
+                <button @click="addOne">{{ one }}</button>
                 <button @click="addTwo">{{ two }}</button>
                 <button @click="addThree">{{ three }}</button>
                 <button @click="addZero">{{ zero }}</button>
